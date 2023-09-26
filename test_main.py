@@ -1,23 +1,29 @@
-"""A module for testing main summator function."""
+"""Test module main."""
 
-from typing import Tuple
+
+from typing import List
 
 import pytest
 
-from main import summator
+from main import get_possible_numbers
 
-test_data = [((3, 5), 8), ((2, 4), 6), ((-10, 10), 0)]
+some_numbers = (
+    ('56', ['56', '46', '26', '66', '86', '55', '53', '59']),
+    ('120', ['120', '220', '420', '110', '150', '130', '128']),
+    ('256', ['256', '156', '556', '356', '226', '246', '266', '286', '253', '255', '259']),
+    ('1000', ['1000', '2000', '4000', '1800', '1080', '1008']),
+)
 
 
-@pytest.mark.parametrize('numbers, expected', test_data)
-def test_summator(numbers: Tuple, expected: int) -> None:
-    """Test summator function with test_data.
+@pytest.mark.parametrize('text, expected', some_numbers)
+def test_password_detective(text: str, expected: List) -> None:
+    """Test our detective function.
 
     Args:
-        numbers: numbers to be passed to summator.
-        expected: an actual expected summator result.
+        text: - input text parameter
+        expected: - expected list parameter
 
     Asserts:
-        True if summator returns expected answers.
+        True if answer is correct
     """
-    assert summator(*numbers) == expected
+    assert sorted(get_possible_numbers(text)) == sorted(expected)
